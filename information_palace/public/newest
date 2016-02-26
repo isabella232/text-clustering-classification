@@ -1,0 +1,191 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rss version="2.0">
+  <channel>
+    <title>Hacker News: Newest</title>
+    <link>https://news.ycombinator.com/newest</link>
+    <description>Hacker News RSS</description>
+    <docs>https://edavis.github.io/hnrss/</docs>
+    <generator>https://github.com/edavis/hnrss</generator>
+    <lastBuildDate>Fri, 13 Nov 2015 08:27:51 GMT</lastBuildDate>
+    <item>
+      <title>Why is electricity so hard to understand?</title>
+      <description>Comments URL: &lt;a href="https://news.ycombinator.com/item?id=10558622"&gt;https://news.ycombinator.com/item?id=10558622&lt;/a&gt;</description>
+      <pubDate>Fri, 13 Nov 2015 08:24:46 GMT</pubDate>
+      <link>http://amasci.com/miscon/whyhard1.html</link>
+      <author>Tomte</author>
+      <comments>https://news.ycombinator.com/item?id=10558622</comments>
+      <guid isPermaLink="false">https://news.ycombinator.com/item?id=10558622</guid>
+    </item>
+    <item>
+      <title>Show HN: Robust TV/Anime Series Renamer in Python</title>
+      <description>Comments URL: &lt;a href="https://news.ycombinator.com/item?id=10558613"&gt;https://news.ycombinator.com/item?id=10558613&lt;/a&gt;</description>
+      <pubDate>Fri, 13 Nov 2015 08:21:09 GMT</pubDate>
+      <link>https://github.com/aviaryan/series-renamer</link>
+      <author>aviaryan</author>
+      <comments>https://news.ycombinator.com/item?id=10558613</comments>
+      <guid isPermaLink="false">https://news.ycombinator.com/item?id=10558613</guid>
+    </item>
+    <item>
+      <title>Handlebars Considered Harmful</title>
+      <description>Comments URL: &lt;a href="https://news.ycombinator.com/item?id=10558611"&gt;https://news.ycombinator.com/item?id=10558611&lt;/a&gt;</description>
+      <pubDate>Fri, 13 Nov 2015 08:19:53 GMT</pubDate>
+      <link>https://bryce.fisher-fleig.org/blog/handlebars-considered-harmful/</link>
+      <author>edward</author>
+      <comments>https://news.ycombinator.com/item?id=10558611</comments>
+      <guid isPermaLink="false">https://news.ycombinator.com/item?id=10558611</guid>
+    </item>
+    <item>
+      <title>A collection of PHP exploit scripts</title>
+      <description>Comments URL: &lt;a href="https://news.ycombinator.com/item?id=10558608"&gt;https://news.ycombinator.com/item?id=10558608&lt;/a&gt;</description>
+      <pubDate>Fri, 13 Nov 2015 08:19:06 GMT</pubDate>
+      <link>https://ma.ttias.be/a-collection-of-php-exploit-scripts/</link>
+      <author>Mojah</author>
+      <comments>https://news.ycombinator.com/item?id=10558608</comments>
+      <guid isPermaLink="false">https://news.ycombinator.com/item?id=10558608</guid>
+    </item>
+    <item>
+      <title>This Week in Mobile Development October 6th – 13th</title>
+      <description>Comments URL: &lt;a href="https://news.ycombinator.com/item?id=10558605"&gt;https://news.ycombinator.com/item?id=10558605&lt;/a&gt;</description>
+      <pubDate>Fri, 13 Nov 2015 08:17:53 GMT</pubDate>
+      <link>http://v-play.net/2015/11/this-week-in-mobile-development-october-6th-13th/</link>
+      <author>MichaelVPlay</author>
+      <comments>https://news.ycombinator.com/item?id=10558605</comments>
+      <guid isPermaLink="false">https://news.ycombinator.com/item?id=10558605</guid>
+    </item>
+    <item>
+      <title>The Empire Strikes Back</title>
+      <description>Comments URL: &lt;a href="https://news.ycombinator.com/item?id=10558604"&gt;https://news.ycombinator.com/item?id=10558604&lt;/a&gt;</description>
+      <pubDate>Fri, 13 Nov 2015 08:17:47 GMT</pubDate>
+      <link>http://www.viva64.com/en/b/0356/</link>
+      <author>DmitryNovikov</author>
+      <comments>https://news.ycombinator.com/item?id=10558604</comments>
+      <guid isPermaLink="false">https://news.ycombinator.com/item?id=10558604</guid>
+    </item>
+    <item>
+      <title>Basic Soldering Lessons</title>
+      <description>Comments URL: &lt;a href="https://news.ycombinator.com/item?id=10558603"&gt;https://news.ycombinator.com/item?id=10558603&lt;/a&gt;</description>
+      <pubDate>Fri, 13 Nov 2015 08:16:44 GMT</pubDate>
+      <link>https://www.youtube.com/user/paceworldwide</link>
+      <author>tatx</author>
+      <comments>https://news.ycombinator.com/item?id=10558603</comments>
+      <guid isPermaLink="false">https://news.ycombinator.com/item?id=10558603</guid>
+    </item>
+    <item>
+      <title>Windows 10 Mobile</title>
+      <description>Comments URL: &lt;a href="https://news.ycombinator.com/item?id=10558600"&gt;https://news.ycombinator.com/item?id=10558600&lt;/a&gt;</description>
+      <pubDate>Fri, 13 Nov 2015 08:16:21 GMT</pubDate>
+      <link>http://www.mindstick.com/Articles/11910/windows-10-mobile</link>
+      <author>Royjain</author>
+      <comments>https://news.ycombinator.com/item?id=10558600</comments>
+      <guid isPermaLink="false">https://news.ycombinator.com/item?id=10558600</guid>
+    </item>
+    <item>
+      <title>Growing evidence for dark matter</title>
+      <description>Comments URL: &lt;a href="https://news.ycombinator.com/item?id=10558598"&gt;https://news.ycombinator.com/item?id=10558598&lt;/a&gt;</description>
+      <pubDate>Fri, 13 Nov 2015 08:15:54 GMT</pubDate>
+      <link>http://www.economist.com/news/science-and-technology/21678126-powerful-gamma-rays-centre-milky-way-look-signs-elusive</link>
+      <author>cjg</author>
+      <comments>https://news.ycombinator.com/item?id=10558598</comments>
+      <guid isPermaLink="false">https://news.ycombinator.com/item?id=10558598</guid>
+    </item>
+    <item>
+      <title>Windows 10 November Update Reset My Defaults</title>
+      <description>So I decided to do the November Update. It's big so it took a long time. Well afterwords it restarts the computer and I get a screen similar to the first install screen where it greets you.&lt;p&gt;Well, I decide to go about my business, and what's this, Edge is now my default browser. Oh and notepad is now my default text editor. This made me worry so I decided to check the privacy settings. All were now enabled. I haven't updated my other computers in the house yet, but this startled me quite a bit.&lt;p&gt;I thought I would post this here just in case this happens to anyone else and so others check just to make sure they don't suddenly start sending data they do not want to.&lt;p&gt;[1]: https://blogs.windows.com/windowsexperience/2015/11/12/first-major-update-for-windows-10-available-today/</description>
+      <pubDate>Fri, 13 Nov 2015 08:12:56 GMT</pubDate>
+      <link>https://news.ycombinator.com/item?id=10558592</link>
+      <author>kreutzwj</author>
+      <comments>https://news.ycombinator.com/item?id=10558592</comments>
+      <guid isPermaLink="false">https://news.ycombinator.com/item?id=10558592</guid>
+    </item>
+    <item>
+      <title>Moky Puts an Invisible Touchpad on the Keyboard</title>
+      <description>Comments URL: &lt;a href="https://news.ycombinator.com/item?id=10558579"&gt;https://news.ycombinator.com/item?id=10558579&lt;/a&gt;</description>
+      <pubDate>Fri, 13 Nov 2015 08:10:55 GMT</pubDate>
+      <link>http://techcrunch.com/2015/06/05/moky-indiegogo/#.opsjnk:MMy9</link>
+      <author>jimsojim</author>
+      <comments>https://news.ycombinator.com/item?id=10558579</comments>
+      <guid isPermaLink="false">https://news.ycombinator.com/item?id=10558579</guid>
+    </item>
+    <item>
+      <title>Java debugging and language support in Visual Studio for Android</title>
+      <description>Comments URL: &lt;a href="https://news.ycombinator.com/item?id=10558578"&gt;https://news.ycombinator.com/item?id=10558578&lt;/a&gt;</description>
+      <pubDate>Fri, 13 Nov 2015 08:10:46 GMT</pubDate>
+      <link>http://blogs.msdn.com/b/vcblog/archive/2015/11/06/java-debugging-and-language-support-in-visual-studio-projects-for-android.aspx</link>
+      <author>mpalme</author>
+      <comments>https://news.ycombinator.com/item?id=10558578</comments>
+      <guid isPermaLink="false">https://news.ycombinator.com/item?id=10558578</guid>
+    </item>
+    <item>
+      <title>HHCodes: A Data Structure for Spatio-Temporal Databases (Varma, 1990) [pdf]</title>
+      <description>Comments URL: &lt;a href="https://news.ycombinator.com/item?id=10558577"&gt;https://news.ycombinator.com/item?id=10558577&lt;/a&gt;</description>
+      <pubDate>Fri, 13 Nov 2015 08:10:41 GMT</pubDate>
+      <link>https://journals.lib.unb.ca/index.php/ihr/article/download/23318/27093</link>
+      <author>espeed</author>
+      <comments>https://news.ycombinator.com/item?id=10558577</comments>
+      <guid isPermaLink="false">https://news.ycombinator.com/item?id=10558577</guid>
+    </item>
+    <item>
+      <title>Jekyll against the rest of the world</title>
+      <description>Comments URL: &lt;a href="https://news.ycombinator.com/item?id=10558569"&gt;https://news.ycombinator.com/item?id=10558569&lt;/a&gt;</description>
+      <pubDate>Fri, 13 Nov 2015 08:08:07 GMT</pubDate>
+      <link>http://tobyx.com/2015/jekyll-vs-world</link>
+      <author>seedler</author>
+      <comments>https://news.ycombinator.com/item?id=10558569</comments>
+      <guid isPermaLink="false">https://news.ycombinator.com/item?id=10558569</guid>
+    </item>
+    <item>
+      <title>Evidence for p-hacking or selective publication in studies on romantic priming</title>
+      <description>Comments URL: &lt;a href="https://news.ycombinator.com/item?id=10558553"&gt;https://news.ycombinator.com/item?id=10558553&lt;/a&gt;</description>
+      <pubDate>Fri, 13 Nov 2015 08:05:35 GMT</pubDate>
+      <link>http://blogs.discovermagazine.com/neuroskeptic/2015/11/10/reproducibility-crisis-the-plot-thickens/#.VkOVkb-pI_i</link>
+      <author>DavidSJ</author>
+      <comments>https://news.ycombinator.com/item?id=10558553</comments>
+      <guid isPermaLink="false">https://news.ycombinator.com/item?id=10558553</guid>
+    </item>
+    <item>
+      <title>Edward Snowden explains how to reclaim your privacy</title>
+      <description>Comments URL: &lt;a href="https://news.ycombinator.com/item?id=10558552"&gt;https://news.ycombinator.com/item?id=10558552&lt;/a&gt;</description>
+      <pubDate>Fri, 13 Nov 2015 08:05:33 GMT</pubDate>
+      <link>https://theintercept.com/2015/11/12/edward-snowden-explains-how-to-reclaim-your-privacy/</link>
+      <author>noyesno</author>
+      <comments>https://news.ycombinator.com/item?id=10558552</comments>
+      <guid isPermaLink="false">https://news.ycombinator.com/item?id=10558552</guid>
+    </item>
+    <item>
+      <title>Dark Chocolate</title>
+      <description>Comments URL: &lt;a href="https://news.ycombinator.com/item?id=10558542"&gt;https://news.ycombinator.com/item?id=10558542&lt;/a&gt;</description>
+      <pubDate>Fri, 13 Nov 2015 08:03:22 GMT</pubDate>
+      <link>http://masoia.blogspot.com/2015/11/dark-chocolate.html</link>
+      <author>kamal_kr</author>
+      <comments>https://news.ycombinator.com/item?id=10558542</comments>
+      <guid isPermaLink="false">https://news.ycombinator.com/item?id=10558542</guid>
+    </item>
+    <item>
+      <title>ActorDB – ActorDB – How and why we run SQLite on top of LMDB</title>
+      <description>Comments URL: &lt;a href="https://news.ycombinator.com/item?id=10558533"&gt;https://news.ycombinator.com/item?id=10558533&lt;/a&gt;</description>
+      <pubDate>Fri, 13 Nov 2015 08:00:32 GMT</pubDate>
+      <link>http://blog.biokoda.com/post/133121776825/actordb-how-and-why-we-run-sqlite-on-top-of-lmdb</link>
+      <author>biokoda</author>
+      <comments>https://news.ycombinator.com/item?id=10558533</comments>
+      <guid isPermaLink="false">https://news.ycombinator.com/item?id=10558533</guid>
+    </item>
+    <item>
+      <title>Supernet VPN – service for unblocking websites and protecting privacy</title>
+      <description>Comments URL: &lt;a href="https://news.ycombinator.com/item?id=10558516"&gt;https://news.ycombinator.com/item?id=10558516&lt;/a&gt;</description>
+      <pubDate>Fri, 13 Nov 2015 07:56:39 GMT</pubDate>
+      <link>https://supernet.io/?utm_source=news.ycombinator.com&amp;utm_medium=post&amp;utm_campaign=Supernet</link>
+      <author>Supernet</author>
+      <comments>https://news.ycombinator.com/item?id=10558516</comments>
+      <guid isPermaLink="false">https://news.ycombinator.com/item?id=10558516</guid>
+    </item>
+    <item>
+      <title>Corona (satellite)</title>
+      <description>Comments URL: &lt;a href="https://news.ycombinator.com/item?id=10558492"&gt;https://news.ycombinator.com/item?id=10558492&lt;/a&gt;</description>
+      <pubDate>Fri, 13 Nov 2015 07:45:16 GMT</pubDate>
+      <link>https://en.wikipedia.org/wiki/Corona_%28satellite%29</link>
+      <author>DrScump</author>
+      <comments>https://news.ycombinator.com/item?id=10558492</comments>
+      <guid isPermaLink="false">https://news.ycombinator.com/item?id=10558492</guid>
+    </item>
+  </channel>
+</rss>

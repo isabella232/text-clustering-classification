@@ -1,0 +1,15 @@
+logs/
+target/
+.idea
+.idea_modules
+.classpath
+.project
+.settings
+RUNNING_PID
+.cache*
+.sbtserver
+*.iml
+.sbtserver*
+ouput.json
+project/*-shim.sbt
+project/project/
