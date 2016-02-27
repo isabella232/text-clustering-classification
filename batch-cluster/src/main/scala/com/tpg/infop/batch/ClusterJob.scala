@@ -8,11 +8,12 @@ import org.apache.spark.ml.feature.{HashingTF, IDF, StopWordsRemover}
 import org.apache.spark.mllib.feature
 import org.apache.spark.mllib.linalg.{Vector, Vectors}
 import org.apache.spark.rdd.RDD
-import org.apache.spark.sql.{DataFrame, Row, SQLContext}
 import org.apache.spark.sql.functions._
+import org.apache.spark.sql.{DataFrame, Row, SQLContext}
 import org.apache.spark.{SparkConf, SparkContext}
 import org.json4s.NoTypeHints
 import org.json4s.jackson.Serialization
+import org.rogach.scallop.Scallop
 import org.slf4j.LoggerFactory
 
 import scala.collection.Map
@@ -256,15 +257,20 @@ object ClusterJob {
   }
 
   def main(args: Array[String]) {
-    val inputPath = args(0)
-    val outputPath = args(1)
-    val k = if (args.length > 2) Integer.valueOf(args(2)).asInstanceOf[Int] else -1
-    val maxIter = if (args.length > 3) Integer.valueOf(args(3)).asInstanceOf[Int] else -1
 
-    val conf = new SparkConf().setMaster("local").setAppName("InfopClusterApp")
+    val opts = new CmdJobConf(args)
+    opts.afterInit()
+    logger.info("Starting information-palace batch job: {}", opts.summary)
+
+    val inputPath = opts.inputPath()
+    val outputPath = opts.outputPath()
+    val k = opts.k()
+    val maxIter = opts.max()
+
+    val conf = new SparkConf().setMaster(opts.master()).setAppName(opts.appName())
     val sc = new SparkContext(conf)
 
-    logger.info("Starting Infop batch job: {}", args)
     process(sc, inputPath, outputPath, null, k, maxIter)
   }
+
 }

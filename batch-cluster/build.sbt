@@ -16,4 +16,6 @@ libraryDependencies += "org.apache.spark" %% "spark-mllib" % "1.6.0" % "provided
 
 libraryDependencies += "com.typesafe.scala-logging" %% "scala-logging-slf4j" % "2.1.2"
 
+libraryDependencies += "org.rogach" %% "scallop" % "0.9.5"
+
 fork in run := true
