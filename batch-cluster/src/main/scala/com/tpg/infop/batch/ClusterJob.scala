@@ -13,7 +13,6 @@ import org.apache.spark.sql.{DataFrame, Row, SQLContext}
 import org.apache.spark.{SparkConf, SparkContext}
 import org.json4s.NoTypeHints
 import org.json4s.jackson.Serialization
-import org.rogach.scallop.Scallop
 import org.slf4j.LoggerFactory
 
 import scala.collection.Map
