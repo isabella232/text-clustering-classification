@@ -1,7 +1,48 @@
-@(message: String)
+@main("BBC News Topic Cluster Demo") {
+<div class="row">
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-offset-2 col-md-10">
+          <div class="btn-group" role="group">
+              <button type="button" class="btn btn-default">Day 1</button>
+              <button type="button" class="btn btn-default">Day 2</button>
+              <button type="button" class="btn btn-default">Day 3</button>
+              <button type="button" class="btn btn-default">Day 4</button>
+              <button type="button" class="btn btn-default">Day 5</button>
+              <button type="button" class="btn btn-default">Day 6</button>
+              <button type="button" class="btn btn-default">Day 7</button>
+              <button type="button" class="btn btn-default">Day 8</button>
+              <button type="button" class="btn btn-default">Day 9</button>
+              <button type="button" class="btn btn-default">Day 10</button>
+          </div>
+        </div>
+      </div>
+      <div id="viz">
+      </div>
+    </div>
+    <div class="col-md-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Unique terms
+            </div>
+            <div class="panel-body">
+            </div>
+            <ul id="topTerms--unique" class="list-group">
 
-@main("Welcome to Play") {
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Common terms
+            </div>
+            <div class="panel-body">
+            </div>
+            <ul id="topTerms--common" class="list-group">
 
-    @play20.welcome(message)
-
+            </ul>
+        </div>
+    </div>
+</div>
 }
