@@ -38,7 +38,7 @@ object ClusterJob {
     }
 
     val parts = doc.split("\\|{4,4}", 2)
-    if (parts.length == 2) (parts(0), parts(1).toLowerCase) else ("", "")
+    if (parts.length == 2) (parts(0), parts(1).trim.toLowerCase) else ("", "")
   }
 
   def sentenceTokenize(content: String): Array[String] = {
