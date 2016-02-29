@@ -1,0 +1,55 @@
+@(implicit request: RequestHeader)
+
+@main("BBC News Topic Cluster Demo") {
+<div data-ng-app="bbcDemoApp">
+    <div class="row" data-ng-controller="BBCDemoController" data-ng-init='init({wsUrl: "@routes.BBCNewsController.createCluster.webSocketURL()", clusterPath: "@routes.BBCNewsController.clusterOutput(":clusterId")"})'>
+        <div class="col-md-8">
+            <div class="btn-group" role="group" aria-label="input-data-choices">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false" data-category="{{selectedCategory.value}}">
+                        {{selectedCategory.title}}
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li data-ng-repeat="cat in otherCategories"><a href="{{cat.value}}" data-ng-click="handleCategorySelection($event, cat.value)">{{cat.title}}</a></li>
+                    </ul>
+                </div>
+                <button type="button" class="btn {{day.on ? 'btn-primary' : 'btn-default'}}" data-ng-repeat="day in days" data-ng-click="handleDay($event, day.value)">Day {{day.value}}</button>
+            </div>
+            <br/><br/>
+            <div id="viz">
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Unique terms
+                </div>
+                <div class="panel-body">
+                </div>
+                <ul id="topTerms--unique" class="list-group">
+
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Common terms
+                </div>
+                <div class="panel-body">
+                </div>
+                <ul id="topTerms--common" class="list-group">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <hr />
+        <h2>About</h2>
+    </footer>
+</div>
+}

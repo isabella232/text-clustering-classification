@@ -1,4 +1,4 @@
-name := """bbc-demo"""
+name := """infop-expo"""
 
 version := "1.0-SNAPSHOT"
 
