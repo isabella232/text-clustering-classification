@@ -15,8 +15,9 @@ app.controller('BBCDemoController', ['$scope', '$location', function($scope, $lo
         };
     };
 
+    var totalDays = 10;
     $scope.days = [];
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < totalDays; i++) {
         $scope.days.push({
             value: i + 1,
             on: false
@@ -24,11 +25,11 @@ app.controller('BBCDemoController', ['$scope', '$location', function($scope, $lo
     }
 
     $scope.categories = [
-        { value: "#tech",           title: "   Technology" },
-        { value: "#business",       title: "     Business" },
-        { value: "#sport",          title: "        Sport" },
-        { value: "#politics",       title: "     Politics" },
-        { value: "#entertainment",  title: "Entertainment" },
+        { value: "#bbc/tech",           title: "   Technology" },
+        { value: "#bbc/business",       title: "     Business" },
+        { value: "#bbc/sport",          title: "        Sport" },
+        { value: "#bbc/politics",       title: "     Politics" },
+        { value: "#bbc/entertainment",  title: "Entertainment" },
     ];
 
     $scope.selectedCategory = $scope.categories[0];
@@ -57,7 +58,13 @@ app.controller('BBCDemoController', ['$scope', '$location', function($scope, $lo
         $scope.days.forEach(function(e) {
             e.on = e.value <= dayValue ? true : false;
         });
-        $scope.ws.send(dayValue);
+
+        var cmd = {
+            category: $scope.selectedCategory.value.substring(1),
+            dayCount: dayValue,
+            totalDays: totalDays
+        }
+        $scope.ws.send(JSON.stringify(cmd));
     };
 
 }]);

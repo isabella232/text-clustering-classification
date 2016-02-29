@@ -13,3 +13,5 @@ RUNNING_PID
 ouput.json
 project/*-shim.sbt
 project/project/
+/data
+/output
