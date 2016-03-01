@@ -28,13 +28,14 @@ class ClusteringActor(out: ActorRef, config: Configuration) extends Actor {
   override def receive: Receive = {
     case command: ClusterCommand =>
       val totalDocuments = countDocuments(command.category)
-      val inputPath = setupProcessDir(command.processCount(totalDocuments), command.category)
+      val processDocuments = command.processCount(totalDocuments)
+      val inputPath = setupProcessDir(processDocuments, command.category)
 
       val outputDirPath = new File(config.getString("app.cluster.outputPath").get)
       val outputFileName: String = "%s.json".format(UUID.randomUUID())
       val outputFilePath = new File(outputDirPath, outputFileName).getAbsolutePath
 
-      out ! ClusterResponse(MessageType.ClusterStart)
+      out ! ClusterResponse.withData(Map("totalDocuments" -> totalDocuments.toString), MessageType.ClusterStart)
 
       import play.api.libs.concurrent.Execution.Implicits._
       val future = Future {
@@ -49,7 +50,11 @@ class ClusteringActor(out: ActorRef, config: Configuration) extends Actor {
       try {
         import scala.language.postfixOps
         Await.result(future, Timeout(1 second).duration)
-        out ! ClusterResponse.withData(outputFileName, MessageType.ClusterSuccess)
+        val data = Map(
+          "processDocuments" -> processDocuments.toString,
+          "clusterId" -> outputFileName
+        )
+        out ! ClusterResponse.withData(data, MessageType.ClusterSuccess)
       } catch {
         case ex: Exception => out ! ClusterResponse.withException(ex)
       }

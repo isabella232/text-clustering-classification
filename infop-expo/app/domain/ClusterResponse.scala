@@ -2,21 +2,23 @@ package domain
 
 import play.api.libs.json._
 
+import scala.collection.mutable
+
 /**
   * Created by sayantamd on 1/3/16.
   */
 
 object ClusterResponse {
 
-  def withData(data: String, messageType: MessageType = MessageType.HeartBeat): ClusterResponse = {
+  def withData(data: Map[String, String], messageType: MessageType = MessageType.HeartBeat): ClusterResponse = {
     val cr = ClusterResponse(messageType)
-    cr.data = data
+    cr.data ++= data
     cr
   }
 
   def withException(ex: Exception): ClusterResponse = {
     val cr = ClusterResponse(MessageType.ClusterFail)
-    cr.data = ex.getMessage
+    cr.data += (("exception", ex.getMessage))
     cr
   }
 
@@ -26,7 +28,7 @@ object ClusterResponse {
       val cr: ClusterResponse = new ClusterResponse(
         messageType = MessageType.valueOf((json \ "messageType").validate[String].get))
       if (jsObj.keys.contains("data")) {
-        cr.data = (jsObj \ "data").validate[String].get
+        cr.data ++= (jsObj \ "data").validate[Map[String, String]].get
       }
       JsSuccess(value = cr)
     }
@@ -35,11 +37,11 @@ object ClusterResponse {
   val clusterResponseWrites = new Writes[ClusterResponse] {
     override def writes(o: ClusterResponse): JsValue = Json.obj(
       "messageType" -> o.messageType.toString,
-      "data" -> o.data
+      "data" -> o.data.foldLeft(Json.obj()) { case (z, (k, v)) => z + (k, JsString(v)) }
     )
   }
 }
 
 case class ClusterResponse(messageType: MessageType) {
-  var data: String = null
+  var data = mutable.Map[String, String]()
 }

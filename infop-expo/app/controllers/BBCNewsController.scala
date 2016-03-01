@@ -38,4 +38,13 @@ class BBCNewsController extends Controller {
       inline = true
     )
   }
+
+  def clusterNode(category: String, file:String) = Action {
+    val config = play.api.Play.current.configuration
+    Ok.sendFile(
+      content = new File(config.getString("app.cluster.inputPath").get, s"bbc/$category/$file"),
+      inline = true
+    )
+  }
+
 }

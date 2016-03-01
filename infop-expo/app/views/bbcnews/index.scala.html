@@ -18,31 +18,51 @@
                 <button type="button" class="btn {{day.on ? 'btn-primary' : 'btn-default'}}" data-ng-repeat="day in days" data-ng-click="handleDay($event, day.value)">Day {{day.value}}</button>
             </div>
             <br/><br/>
-            <div id="viz">
+            <div class="row" id="viz">
+                <div class="col-sm-3 col-sm-offset-4" data-ng-if="heartBeats > 0">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h3>
+                                <span class="text-danger">
+                                    <span class="glyphicon glyphicon-heart{{heartBeats % 2 == 0 ? '-empty': ''}}"></span>
+                                </span> Working...
+                            </h3>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    Unique terms
-                </div>
                 <div class="panel-body">
+                    <span>{{documents.analyzed}}</span> documents analyzed
                 </div>
-                <ul id="topTerms--unique" class="list-group">
-
-                </ul>
             </div>
-        </div>
-        <div class="col-md-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Common terms
-                </div>
-                <div class="panel-body">
-                </div>
-                <ul id="topTerms--common" class="list-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Unique terms
+                        </div>
+                        <div class="panel-body">
+                        </div>
+                        <ul id="topTerms--unique" class="list-group">
 
-                </ul>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Common terms
+                        </div>
+                        <div class="panel-body">
+                        </div>
+                        <ul id="topTerms--common" class="list-group">
+
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -50,6 +70,34 @@
     <footer>
         <hr />
         <h2>About</h2>
+        <p>
+            This example demonstrates the information discovery process using clustering applied to over 2000
+            <strong><a href="http://mlg.ucd.ie/datasets/bbc.html" target="_blank">news
+            items from BBC archives</a></strong>.
+        </p>
+        <p>
+            The data set is divided in to 5 sections:
+            <ul>
+                <li>Technology</li>
+                <li>Business</li>
+                <li>Sport</li>
+                <li>Politics</li>
+                <li>Entertainment</li>
+            </ul>
+            
+            You can change the categories by using the dropdown button &mdash;
+            <img src='@routes.Assets.versioned("images/bbc/categories.png")' width="174" height="171" />
+        </p>
+
+        <p>
+            The data set in each category is divided over a number of days. As you click on any day button, the
+            system picks content from that day and all previous days in the data set.<br/>
+
+            For example, if you click on <img src='@routes.Assets.versioned("images/bbc/day_item.png")' width="67" height="38" />,
+            that day and all previous days are selected. The documents for all the three days are used to generate
+            the cluster. As you progress through each day, the cluster is recreated.
+        </p>
+
     </footer>
 </div>
 }

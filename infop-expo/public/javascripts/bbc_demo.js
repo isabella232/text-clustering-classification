@@ -1,6 +1,11 @@
 var app = angular.module('bbcDemoApp', []);
 app.controller('BBCDemoController', ['$scope', '$location', function($scope, $location) {
 
+    $scope.heartBeats = 0;
+    $scope.documents = {
+        analyzed: 0
+    };
+
     var d3CirclePack = null;
     $scope.init = function(opts) {
 
@@ -13,13 +18,29 @@ app.controller('BBCDemoController', ['$scope', '$location', function($scope, $lo
             switch(message.messageType) {
                 case "ClusterStart":
                     d3CirclePack.fadeOut();
+                    $scope.$apply(function() {
+                        $scope.heartBeats = 0;
+                    });
                     break;
                 case "ClusterSuccess":
-                    d3CirclePack.draw(opts.clusterPath.replace(":clusterId", message.data));
+                    $scope.$apply(function() {
+                        $scope.documents.analyzed = message.data.processDocuments;
+                        $scope.heartBeats = 0;
+                    });
+                    d3CirclePack.draw(opts.clusterPath.replace(":clusterId", message.data.clusterId));
                     break;
                 case "ClusterFail":
+                    var errMsg = "Error in cluster computation: " + message.data.exception;
+                    if (window.console) {
+                        window.console.error(errMsg);
+                    } else {
+                        window.alert(errMsg);
+                    }
                     break;
                 case "HeartBeat":
+                    $scope.$apply(function() {
+                        $scope.heartBeats += 1;
+                    });
                     break;
                 default:
                     break;
@@ -62,7 +83,8 @@ app.controller('BBCDemoController', ['$scope', '$location', function($scope, $lo
             $scope.selectedCategory = newSelection;
             $scope.otherCategories = $scope.otherCategoriesFn();
             $scope.days.forEach(function(e) { e.on = false; });
-            d3CirclePack.fadeOut();
+            d3CirclePack.clear();
+            $scope.documents.analyzed = 0;
         }
     };
 

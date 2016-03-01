@@ -135,11 +135,26 @@ InfopExpo.D3CirclePack.prototype.draw = function(dataPath) {
         circle.attr("r", function(d) { return d.r * k; });
       }
     });
-
-    d3.select(self.frameElement).style("height", diameter + "px");
-
 };
 
 InfopExpo.D3CirclePack.prototype.fadeOut = function() {
-    $(this.container + " svg").fadeOut();
+    var cpSelectors = [this.container + " svg", this.uniqueTermsList + " li", this.commonTermsList + " li"];
+    var cp = this;
+
+    var cpElements = $(cpSelectors.join(","));
+    if (cpElements.length > 0) {
+        cpElements.fadeOut({
+            done: function() {
+                this.remove();
+                $(cp.container).removeAttr("style");
+            }
+        });
+    }
+};
+
+InfopExpo.D3CirclePack.prototype.clear = function() {
+    var cpSelectors = [this.container + " svg", this.uniqueTermsList + " li", this.commonTermsList + " li"];
+    var cpElements = $(cpSelectors.join(","));
+    cpElements.remove();
+    $(this.container).removeAttr("style");
 };
