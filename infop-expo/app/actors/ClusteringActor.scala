@@ -5,9 +5,13 @@ import java.util.UUID
 
 import akka.actor.{Actor, ActorRef, Props}
 import akka.event.Logging
-import play.api.Logger
-import domain.ClusterCommand
-import play.api.Configuration
+import akka.util.Timeout
+import domain.{ClusterCommand, ClusterResponse, MessageType, SparkCommand}
+import play.api.{Logger, Configuration}
+import util.SparkFacade
+
+import scala.concurrent.{Future, Await}
+import scala.concurrent.duration._
 
 /**
   * Created by sayantamd on 29/2/16.
@@ -16,7 +20,6 @@ import play.api.Configuration
 object ClusteringActor {
   def props(out: ActorRef, config: Configuration): Props = Props(new ClusteringActor(out, config))
 }
-
 
 class ClusteringActor(out: ActorRef, config: Configuration) extends Actor {
 
@@ -31,8 +34,25 @@ class ClusteringActor(out: ActorRef, config: Configuration) extends Actor {
       val outputFileName: String = "%s.json".format(UUID.randomUUID())
       val outputFilePath = new File(outputDirPath, outputFileName).getAbsolutePath
 
-      invokeSpark(inputPath, outputFilePath)
-      out ! outputFileName
+      out ! ClusterResponse(MessageType.ClusterStart)
+
+      import play.api.libs.concurrent.Execution.Implicits._
+      val future = Future {
+        SparkFacade.invokeSpark(config.getConfig("app.cluster.spark").get, SparkCommand(inputPath, outputFilePath))
+      }
+
+      while (!future.isCompleted) {
+        Thread.sleep(1000)
+        out ! ClusterResponse(MessageType.HeartBeat)
+      }
+
+      try {
+        import scala.language.postfixOps
+        Await.result(future, Timeout(1 second).duration)
+        out ! ClusterResponse.withData(outputFileName, MessageType.ClusterSuccess)
+      } catch {
+        case ex: Exception => out ! ClusterResponse.withException(ex)
+      }
   }
 
   def countDocuments(category: String): Int = {
@@ -62,21 +82,6 @@ class ClusteringActor(out: ActorRef, config: Configuration) extends Actor {
       .foreach((f) => java.nio.file.Files.copy(f.toPath, new File(processDir, f.getName).toPath))
 
     processPath
-  }
-
-  def invokeSpark(inputPath: String, outputFilePath: String) = {
-
-    val sparkHome = config.getString("app.cluster.spark.home").get
-    val sparkMaster = config.getString("app.cluster.spark.master").get
-    val sparkJobClass = config.getString("app.cluster.spark.jobClass").get
-    val sparkJobAssembly = config.getString("app.cluster.spark.jobAssembly").get
-
-    val cmd = s"$sparkHome/bin/spark-submit --class $sparkJobClass $sparkJobAssembly --master $sparkMaster $inputPath $outputFilePath"
-    import sys.process._
-    import scala.language.postfixOps
-    log.info(cmd)
-    Logger.info(cmd)
-    cmd!
   }
 
 }

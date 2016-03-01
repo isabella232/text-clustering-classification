@@ -8,10 +8,22 @@ app.controller('BBCDemoController', ['$scope', '$location', function($scope, $lo
 
         $scope.ws = new WebSocket(opts.wsUrl);
         $scope.ws.onmessage = function(event) {
-            if (window.console) window.console.log(event.data);
-            var id = event.data;
-            d3CirclePack.fadeOut();
-            d3CirclePack.draw(opts.clusterPath.replace(":clusterId", id));
+            if (window.console) window.console.debug(event.data);
+            var message = JSON.parse(event.data);
+            switch(message.messageType) {
+                case "ClusterStart":
+                    d3CirclePack.fadeOut();
+                    break;
+                case "ClusterSuccess":
+                    d3CirclePack.draw(opts.clusterPath.replace(":clusterId", message.data));
+                    break;
+                case "ClusterFail":
+                    break;
+                case "HeartBeat":
+                    break;
+                default:
+                    break;
+            }
         };
     };
 

@@ -141,5 +141,5 @@ InfopExpo.D3CirclePack.prototype.draw = function(dataPath) {
 };
 
 InfopExpo.D3CirclePack.prototype.fadeOut = function() {
-    d3.select("svg").remove();
+    $(this.container + " svg").fadeOut();
 };

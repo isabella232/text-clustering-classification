@@ -4,7 +4,7 @@ import java.io.File
 
 import actors.ClusteringActor
 import akka.actor.ActorRef
-import domain.ClusterCommand
+import domain.{MessageType, ClusterResponse, ClusterCommand}
 import play.api.libs.iteratee.{Enumerator, Iteratee}
 import play.api.libs.json._
 import play.api.mvc.WebSocket.FrameFormatter
@@ -19,9 +19,14 @@ class BBCNewsController extends Controller {
   }
 
   implicit val inEventFormat = Json.format[ClusterCommand]
-  implicit val inEventFrameFormatter = FrameFormatter.jsonFrame[ClusterCommand]
 
-  def createCluster = WebSocket.acceptWithActor[ClusterCommand, String] { request =>
+  implicit val clusterResponseReads = ClusterResponse.clusterResponseReads
+  implicit val clusterResponseWrites = ClusterResponse.clusterResponseWrites
+
+  implicit val inEventFrameFormatter = FrameFormatter.jsonFrame[ClusterCommand]
+  implicit val outEventFrameFormatter = FrameFormatter.jsonFrame[ClusterResponse]
+
+  def createCluster = WebSocket.acceptWithActor[ClusterCommand, ClusterResponse] { request =>
     val config = play.api.Play.current.configuration
     (out: ActorRef) => ClusteringActor.props(out, config)
   }
