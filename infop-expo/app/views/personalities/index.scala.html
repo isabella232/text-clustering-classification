@@ -1,0 +1,86 @@
+@(implicit request: RequestHeader)
+
+@main("Personalities Demo") {
+
+<div data-ng-app="PersonalitiesApp">
+    <div class="row" data-ng-controller="PersonalitiesDemoController" data-ng-init='init({wsUrl: "@routes.PersonalitiesController.createCluster.webSocketURL()", clusterPath: "@routes.PersonalitiesController.clusterOutput(":clusterId")"})'>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-4" data-ng-repeat="person in persons">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="thumbnail">
+                                        <img src='{{thumbnail(person.key, {gandhi: "@routes.Assets.versioned("images/personalities/gandhi.png")", churchill: "@routes.Assets.versioned("images/personalities/churchill.png")", napoleon: "@routes.Assets.versioned("images/personalities/napoleon.png")"})}}' width="150" height="150" />
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <h4>{{person.name}}</h4>
+                                    <br/>
+                                    <button class="btn btn-default" disabled="disabled" type="button">
+                                        Sources <span class="badge">{{person.sourcesCount}}</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/><br/>
+            <div class="row" id="viz">
+                <div class="col-sm-3 col-sm-offset-4" data-ng-if="heartBeats > 0">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h3>
+                                <span class="text-danger">
+                                    <span class="glyphicon glyphicon-heart{{heartBeats % 2 == 0 ? '-empty': ''}}"></span>
+                                </span> Working...
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body text-center">
+                    <button class="btn btn-primary btn-lg" data-ng-click='doAnalysis()'>
+                        Analyze This
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Unique terms
+                        </div>
+                        <div class="panel-body">
+                        </div>
+                        <ul id="topTerms--unique" class="list-group">
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Common terms
+                        </div>
+                        <div class="panel-body">
+                        </div>
+                        <ul id="topTerms--common" class="list-group">
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <hr/>
+        <h2>About</h2>
+    </footer>
+</div>
+}

@@ -2,31 +2,34 @@ package controllers
 
 import java.io.File
 
-import actors.BbcClusteringActor
+import actors.PersonalitiesClusteringActor
 import akka.actor.ActorRef
-import domain.{BbcClusterCommand, ClusterResponse}
+import domain.{ClusterResponse, PersonalitiesClusterCommand}
 import play.api.Play.current
 import play.api.libs.json._
 import play.api.mvc.WebSocket.FrameFormatter
 import play.api.mvc._
 
-class BBCNewsController extends Controller {
+/**
+  * Created by sayantamd on 2/3/16.
+  */
+class PersonalitiesController extends Controller {
 
   def index = Action { implicit request =>
-    Ok(views.html.bbcnews.index(request))
+    Ok(views.html.personalities.index(request))
   }
 
-  implicit val inEventFormat = Json.format[BbcClusterCommand]
+  implicit val inEventFormat = Json.format[PersonalitiesClusterCommand]
 
   implicit val clusterResponseReads = ClusterResponse.clusterResponseReads
   implicit val clusterResponseWrites = ClusterResponse.clusterResponseWrites
 
-  implicit val inEventFrameFormatter = FrameFormatter.jsonFrame[BbcClusterCommand]
+  implicit val inEventFrameFormatter = FrameFormatter.jsonFrame[PersonalitiesClusterCommand]
   implicit val outEventFrameFormatter = FrameFormatter.jsonFrame[ClusterResponse]
 
-  def createCluster = WebSocket.acceptWithActor[BbcClusterCommand, ClusterResponse] { request =>
+  def createCluster = WebSocket.acceptWithActor[PersonalitiesClusterCommand, ClusterResponse] { request =>
     val config = play.api.Play.current.configuration
-    (out: ActorRef) => BbcClusteringActor.props(out, config)
+    (out: ActorRef) => PersonalitiesClusteringActor.props(out, config)
   }
 
   def clusterOutput(clusterId: String) = Action {
@@ -37,12 +40,11 @@ class BBCNewsController extends Controller {
     )
   }
 
-  def clusterNode(category: String, file:String) = Action {
+  def clusterNode(file:String) = Action {
     val config = play.api.Play.current.configuration
     Ok.sendFile(
-      content = new File(config.getString("app.cluster.bbc.inputPath").get, s"/$category/$file"),
+      content = new File(config.getString("app.cluster.personalities.inputPath").get, s"/$file"),
       inline = true
     )
   }
-
 }

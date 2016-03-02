@@ -6,7 +6,7 @@ import java.util.UUID
 import akka.actor.{Actor, ActorRef, Props}
 import akka.event.Logging
 import akka.util.Timeout
-import domain.{ClusterCommand, ClusterResponse, MessageType, SparkCommand}
+import domain.{BbcClusterCommand, ClusterResponse, MessageType, SparkCommand}
 import play.api.{Logger, Configuration}
 import util.SparkFacade
 
@@ -17,16 +17,16 @@ import scala.concurrent.duration._
   * Created by sayantamd on 29/2/16.
   */
 
-object ClusteringActor {
-  def props(out: ActorRef, config: Configuration): Props = Props(new ClusteringActor(out, config))
+object BbcClusteringActor {
+  def props(out: ActorRef, config: Configuration): Props = Props(new BbcClusteringActor(out, config))
 }
 
-class ClusteringActor(out: ActorRef, config: Configuration) extends Actor {
+class BbcClusteringActor(out: ActorRef, config: Configuration) extends Actor {
 
   val log = Logging(context.system, this)
 
   override def receive: Receive = {
-    case command: ClusterCommand =>
+    case command: BbcClusterCommand =>
       val totalDocuments = countDocuments(command.category)
       val processDocuments = command.processCount(totalDocuments)
       val inputPath = setupProcessDir(processDocuments, command.category)
@@ -61,7 +61,7 @@ class ClusteringActor(out: ActorRef, config: Configuration) extends Actor {
   }
 
   def countDocuments(category: String): Int = {
-    val inputPath = new File(config.getString("app.cluster.inputPath").get)
+    val inputPath = new File(config.getString("app.cluster.bbc.inputPath").get)
     filterInputFiles(category, inputPath).length
   }
 
@@ -74,7 +74,7 @@ class ClusteringActor(out: ActorRef, config: Configuration) extends Actor {
   }
 
   def setupProcessDir(fileCount: Int, category: String): String = {
-    val inputPath = new File(config.getString("app.cluster.inputPath").get)
+    val inputPath = new File(config.getString("app.cluster.bbc.inputPath").get)
     val processPath = config.getString("app.cluster.processPath").get
     val processDir = new File(processPath)
 

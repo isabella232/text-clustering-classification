@@ -3,7 +3,10 @@
 # ~~~~
 
 # Home page
-GET     /                              controllers.BBCNewsController.index
+GET     /                                    controllers.PersonalitiesController.index
+GET     /personalities/clusters              controllers.PersonalitiesController.createCluster
+GET     /personalities/cluster/:clusterId    controllers.PersonalitiesController.clusterOutput(clusterId)
+GET     /personalities/:file                 controllers.PersonalitiesController.clusterNode(file)
 
 # BBC News
 GET     /bbcnews                       controllers.BBCNewsController.index

@@ -15,7 +15,7 @@
                         <li data-ng-repeat="cat in otherCategories"><a href="{{cat.value}}" data-ng-click="handleCategorySelection($event, cat.value)">{{cat.title}}</a></li>
                     </ul>
                 </div>
-                <button type="button" class="btn {{day.on ? 'btn-primary' : 'btn-default'}}" data-ng-repeat="day in days" data-ng-click="handleDay($event, day.value)">Day {{day.value}}</button>
+                <button type="button" class="btn {{day.on ? 'btn-success' : 'btn-default'}}" data-ng-repeat="day in days" data-ng-click="handleDay($event, day.value)">Day {{day.value}}</button>
             </div>
             <br/><br/>
             <div class="row" id="viz">
