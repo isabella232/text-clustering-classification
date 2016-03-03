@@ -50,7 +50,7 @@
             {
                 key: "churchill",
                 name: "Sir Winston Churchill",
-                sourcesCount: 3
+                sourcesCount: 2
             },
             {
                 key: "gandhi",
@@ -66,7 +66,18 @@
         $scope.heartBeats = 0;
 
         $scope.doAnalysis = function() {
-            $scope.ws.send(JSON.stringify({k: -1, maxIter: -1}));
+            var data = {
+                k: $scope.clusterCommand.analysisClusters,
+                maxIter: $scope.clusterCommand.maxIterations
+            };
+
+            if (window.console) window.console.debug(data);
+            $scope.ws.send(JSON.stringify(data));
+        };
+
+        $scope.clusterCommand = {
+            analysisClusters: 3,
+            maxIterations: 25
         };
 
     }]);

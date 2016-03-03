@@ -36,7 +36,10 @@ class PersonalitiesClusteringActor(out: ActorRef, config: Configuration) extends
       val future = Future {
         SparkFacade.invokeSpark(
           config.getConfig("app.cluster.spark").get,
-          SparkCommand(inputPath, outputFilePath)
+          SparkCommand(inputPath, outputFilePath).withOptions(Map(
+            "clusters" -> command.k.toString,
+            "max" -> command.maxIter.toString
+          ))
         )
       }
 

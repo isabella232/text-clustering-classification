@@ -13,4 +13,6 @@ case class SparkCommand(inputPath:String, outputPath: String) {
     this.options ++= options
     this
   }
+
+
 }
