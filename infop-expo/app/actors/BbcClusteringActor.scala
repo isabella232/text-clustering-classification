@@ -1,17 +1,18 @@
 package actors
 
-import java.io.{IOException, File, FilenameFilter}
+import java.io.{File, FilenameFilter, IOException}
+import java.nio.file.Files
 import java.util.UUID
 
 import akka.actor.{Actor, ActorRef, Props}
 import akka.event.Logging
 import akka.util.Timeout
 import domain.{BbcClusterCommand, ClusterResponse, MessageType, SparkCommand}
-import play.api.{Logger, Configuration}
+import play.api.Configuration
 import util.SparkFacade
 
-import scala.concurrent.{Future, Await}
 import scala.concurrent.duration._
+import scala.concurrent.{Await, Future}
 
 /**
   * Created by sayantamd on 29/2/16.
@@ -40,6 +41,13 @@ class BbcClusteringActor(out: ActorRef, config: Configuration) extends Actor {
       import play.api.libs.concurrent.Execution.Implicits._
       val future = Future {
         SparkFacade.invokeSpark(config.getConfig("app.cluster.spark").get, SparkCommand(inputPath, outputFilePath))
+      }
+
+      future.onSuccess {
+        case _ =>
+          val dd = new File(inputPath)
+          dd.listFiles().foreach((f) => { Files.delete(f.toPath) })
+          Files.delete(dd.toPath)
       }
 
       while (!future.isCompleted) {
