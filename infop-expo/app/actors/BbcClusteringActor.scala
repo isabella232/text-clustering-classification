@@ -1,6 +1,6 @@
 package actors
 
-import java.io.{File, FilenameFilter}
+import java.io.{IOException, File, FilenameFilter}
 import java.util.UUID
 
 import akka.actor.{Actor, ActorRef, Props}
@@ -76,17 +76,17 @@ class BbcClusteringActor(out: ActorRef, config: Configuration) extends Actor {
   def setupProcessDir(fileCount: Int, category: String): String = {
     val inputPath = new File(config.getString("app.cluster.bbc.inputPath").get)
     val processPath = config.getString("app.cluster.processPath").get
-    val processDir = new File(processPath)
+    val processDir = new File(processPath, UUID.randomUUID().toString)
 
-    // clear the process directory
-    processDir.listFiles().foreach((f) => f.delete())
+    // create the process directory
+    if (!processDir.mkdir()) throw new IOException(s"Failed to create directory: $processDir")
 
     // copy files from data to process
     filterInputFiles(category, inputPath)
       .take(fileCount)
       .foreach((f) => java.nio.file.Files.copy(f.toPath, new File(processDir, f.getName).toPath))
 
-    processPath
+    processDir.getAbsolutePath
   }
 
 }
