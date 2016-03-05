@@ -13,9 +13,6 @@ Vagrant.configure(2) do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
   # config.vm.box = "base"
-  config.vm.define "dev" do |dev|
-    dev.vm.box = "ubuntu/trusty64"
-  end
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -56,6 +53,13 @@ Vagrant.configure(2) do |config|
   #
   # View the documentation for the provider you are using for more
   # information on available options.
+  config.vm.define "dev" do |dev|
+    dev.vm.box = "ubuntu/trusty64"
+    dev.vm.provider :virtualbox do |vb|
+      vb.memory = "4096"
+    end
+    dev.vm.network "private_network", ip: "192.168.9.24"
+  end
 
   # Define a Vagrant Push strategy for pushing to Atlas. Other push strategies
   # such as FTP and Heroku are also available. See the documentation at
@@ -73,9 +77,22 @@ Vagrant.configure(2) do |config|
   # SHELL
 
   config.omnibus.chef_version = :latest
-
-  config.vm.provision "chef_zero" do |chef|
+  config.berkshelf.enabled = true
+  config.vm.provision "chef_solo" do |chef|
     chef.node_name = "infop-master"
     chef.nodes_path = "nodes"
+    chef.run_list = [
+      "recipe[java]",
+      "recipe[apache_spark::spark-standalone-master]"
+    ]
+    chef.json = {
+      :java => {
+        :oracle => {
+          :accept_oracle_download_terms => true
+        },
+        :jdk_version => 8,
+        :install_flavor => 'oracle'
+      }
+    }
   end
 end
