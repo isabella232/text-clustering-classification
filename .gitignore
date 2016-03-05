@@ -15,3 +15,4 @@ project/*-shim.sbt
 project/project/
 /data
 /output
+.vagrant
