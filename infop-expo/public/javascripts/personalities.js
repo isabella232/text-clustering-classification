@@ -19,10 +19,15 @@
                   case "ClusterSuccess":
                       $scope.$apply(function() {
                           $scope.heartBeats = 0;
+                          $scope.analysisInProgress = false;
                       });
                       d3CirclePack.draw(urlMap.clusterPath.replace(":clusterId", message.data.clusterId));
                       break;
                   case "ClusterFail":
+                      $scope.$apply(function() {
+                          $scope.heartBeats = 0;
+                          $scope.analysisInProgress = false;
+                      });
                       var errMsg = "Error in cluster computation: " + message.data.exception;
                       if (window.console) {
                           window.console.error(errMsg);
@@ -66,6 +71,7 @@
         $scope.heartBeats = 0;
 
         $scope.doAnalysis = function() {
+            $scope.analysisInProgress = true;
             var data = {
                 k: $scope.clusterCommand.analysisClusters,
                 maxIter: $scope.clusterCommand.maxIterations

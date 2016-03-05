@@ -4,18 +4,39 @@
 <div data-ng-app="bbcDemoApp">
     <div class="row" data-ng-controller="BBCDemoController" data-ng-init='init({wsUrl: "@routes.BBCNewsController.createCluster.webSocketURL()", clusterPath: "@routes.BBCNewsController.clusterOutput(":clusterId")"})'>
         <div class="col-md-8">
-            <div class="btn-group" role="group" aria-label="input-data-choices">
-                <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false" data-category="{{selectedCategory.value}}">
-                        {{selectedCategory.title}}
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li data-ng-repeat="cat in otherCategories"><a href="{{cat.value}}" data-ng-click="handleCategorySelection($event, cat.value)">{{cat.title}}</a></li>
-                    </ul>
+            <div class="btn-toolbar" role="toolbar" aria-label="input-data-choices">
+                <div class="row">
+                  <div class="col-sm-2">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false" data-category="{{selectedCategory.value}}"
+                                data-ng-disabled="heartBeats">
+                            {{selectedCategory.title}}
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li data-ng-repeat="cat in otherCategories"><a href="{{cat.value}}" data-ng-click="handleCategorySelection($event, cat.value)">{{cat.title}}</a></li>
+                        </ul>
+                    </div>
+                  </div>
+                  <div class="col-sm-10">
+                    <div class="btn-group btn-group-justified">
+                      <div class="btn-group" role="group" data-ng-repeat="day in days">
+                          <button type="button" class="btn {{day.state == 'on' ? 'btn-success' : day.state == 'off' ? 'btn-default' : 'btn-warning'}}"
+                            data-ng-click="handleDay($event, day.value)" data-ng-disabled="dayHandlingOn">Day {{day.value}}</button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <button type="button" class="btn {{day.on ? 'btn-success' : 'btn-default'}}" data-ng-repeat="day in days" data-ng-click="handleDay($event, day.value)">Day {{day.value}}</button>
+                <div>
+                  <br/>
+                  <div class="row">
+                    <div class="col-sm-8 col-sm-offset-3 alert alert-info alert-dismissible" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                      Click any day-button to create a cluster from documents collected thus far.
+                    </div>
+                  </div>
+                </div>
             </div>
             <br/><br/>
             <div class="row" id="viz">
@@ -84,7 +105,7 @@
                 <li>Politics</li>
                 <li>Entertainment</li>
             </ul>
-            
+
             You can change the categories by using the dropdown button &mdash;
             <img src='@routes.Assets.versioned("images/bbc/categories.png")' width="174" height="171" />
         </p>

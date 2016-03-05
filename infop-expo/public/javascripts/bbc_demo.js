@@ -27,10 +27,18 @@
                         $scope.$apply(function() {
                             $scope.documents.analyzed = message.data.processDocuments;
                             $scope.heartBeats = 0;
+                            $scope.days.forEach(function(e) {
+                                if (e.value <= $scope.dayHandlingOn) e.state = "on";
+                            });
+                            $scope.dayHandlingOn = false;
                         });
                         d3CirclePack.draw(opts.clusterPath.replace(":clusterId", message.data.clusterId));
                         break;
                     case "ClusterFail":
+                        $scope.$apply(function() {
+                            $scope.heartBeats = 0;
+                            $scope.dayHandlingOn = false;
+                        });
                         var errMsg = "Error in cluster computation: " + message.data.exception;
                         if (window.console) {
                             window.console.error(errMsg);
@@ -54,7 +62,7 @@
         for (i = 0; i < totalDays; i++) {
             $scope.days.push({
                 value: i + 1,
-                on: false
+                state: "off"
             });
         }
 
@@ -83,15 +91,16 @@
             if (newSelection) {
                 $scope.selectedCategory = newSelection;
                 $scope.otherCategories = $scope.otherCategoriesFn();
-                $scope.days.forEach(function(e) { e.on = false; });
+                $scope.days.forEach(function(e) { e.state = "off"; });
                 d3CirclePack.clear();
                 $scope.documents.analyzed = 0;
             }
         };
 
         $scope.handleDay = function($event, dayValue) {
+            $scope.dayHandlingOn = dayValue;
             $scope.days.forEach(function(e) {
-                e.on = e.value <= dayValue ? true : false;
+                if (e.value <= dayValue) e.state = "na";
             });
 
             var cmd = {
