@@ -1,0 +1,7 @@
+name 'batch_cluster'
+maintainer 'Sayantam Dey'
+maintainer_email 'sayantam.dey@3pillarglobal.com'
+license 'all_rights'
+description 'Installs/Configures batch-cluster'
+long_description 'Installs/Configures batch-cluster'
+version '0.1.0'

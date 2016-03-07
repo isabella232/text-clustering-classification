@@ -56,7 +56,7 @@ Vagrant.configure(2) do |config|
   config.vm.define "dev" do |dev|
     dev.vm.box = "ubuntu/trusty64"
     dev.vm.provider :virtualbox do |vb|
-      vb.memory = "4096"
+      vb.memory = "8192"
     end
     dev.vm.network "private_network", ip: "192.168.9.24"
   end
@@ -78,21 +78,29 @@ Vagrant.configure(2) do |config|
 
   config.omnibus.chef_version = :latest
   config.berkshelf.enabled = true
-  config.vm.provision "chef_solo" do |chef|
+  config.vm.provision "dependencies", :type => "chef_solo" do |chef|
     chef.node_name = "infop-master"
     chef.nodes_path = "nodes"
-    chef.run_list = [
-      "recipe[java]",
-      "recipe[apache_spark::spark-standalone-master]"
-    ]
-    chef.json = {
-      :java => {
-        :oracle => {
-          :accept_oracle_download_terms => true
-        },
-        :jdk_version => 8,
-        :install_flavor => 'oracle'
-      }
-    }
+    chef.roles_path = "roles"
+    chef.cookbooks_path = "cookbooks"
+
+    chef.add_role "infop_master"
   end
+
+  config.vm.provision "batch_cluster", :type => "chef_solo", :run => "always" do |chef|
+    chef.node_name = "infop-master"
+    chef.nodes_path = "nodes"
+    chef.roles_path = "roles"
+    chef.cookbooks_path = "cookbooks"
+    chef.add_recipe "batch_cluster"
+  end
+
+  config.vm.provision "expo", :type => "chef_solo", :run => "always" do |chef|
+    chef.node_name = "infop-master"
+    chef.nodes_path = "nodes"
+    chef.roles_path = "roles"
+    chef.cookbooks_path = "cookbooks"
+    chef.add_recipe "expo"
+  end
+
 end
