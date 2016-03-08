@@ -4,6 +4,26 @@
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
+directory '/vagrant/output' do
+    owner 'spark'
+    group 'spark'
+    mode '0755'
+    not_if { File.exist? '/vagrant/output' }
+end
+
+local_data_file = '/tmp/text-analytics-expo-data-20160308.tar.gz'
+local_data_location = '/vagrant/data/bbc'
+remote_file local_data_file do
+    source 'https://s3.amazonaws.com/3pillar-atg-backup/text-analytics-expo-data-20160308.tar.gz'
+    not_if { File.exist? local_data_location }
+end
+
+execute 'untar' do
+    command "tar -xzf #{local_data_file}"
+    cwd '/vagrant'
+    not_if { File.exist? local_data_location }
+end
+
 apt_package 'infop-expo' do
     action :remove
     ignore_failure true
