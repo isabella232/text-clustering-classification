@@ -76,7 +76,7 @@ Vagrant.configure(2) do |config|
   #   sudo apt-get install -y apache2
   # SHELL
 
-  config.omnibus.chef_version = :latest
+  config.omnibus.chef_version = "12.7.2"
   config.berkshelf.enabled = true
   config.vm.provision "dependencies", :type => "chef_solo" do |chef|
     chef.node_name = "infop-master"
