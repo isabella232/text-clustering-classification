@@ -11,6 +11,12 @@ directory '/vagrant/output' do
     not_if { File.exist? '/vagrant/output' }
 end
 
+execute 'clear_output' do
+  command 'rm -f *.json'
+  cwd '/vagrant/output'
+  only_if { File.exist? '/vagrant/output' }
+end
+
 local_data_file = '/tmp/text-analytics-expo-data-20160308.tar.gz'
 local_data_location = '/vagrant/data/bbc'
 remote_file local_data_file do
