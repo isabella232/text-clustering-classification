@@ -2,12 +2,12 @@ name "infop_master"
 description "Role for master node of an information palace (cluster)"
 
 run_list(
+  "recipe[etc-environment]",
   "recipe[java]",
   "recipe[scala]",
   "recipe[simple-scala-sbt]",
   "recipe[apache_spark::spark-standalone-master]",
-  "recipe[apache_spark::spark-standalone-worker]",
-  "recipe[etc-environment]"
+  "recipe[apache_spark::spark-standalone-worker]"
 )
 
 default_attributes(
@@ -26,7 +26,6 @@ default_attributes(
   },
 
   'simple-scala-sbt' => {
-    :version => "0.13.9",
-    :java_options => "-Xms512M -Xmx2048M"
+    :version => "0.13.9"
   }
 )
