@@ -17,3 +17,16 @@ bash "java_options" do
       EOH
     not_if { ::ENV[env_key] }
 end
+
+user 'vagrant' do
+  home '/home/vagrant'
+  shell '/bin/bash'
+  password '$1$m3XIKd6L$zNI77cFExa1xJ798mSbvq.'
+  manage_home true
+  not_if { File.exist? '/home/vagrant' }
+end
+
+file '/etc/profile.d/jdk_path.sh' do
+  content "export PATH=/usr/lib/jvm/java-8-oracle-amd64/bin:$PATH"
+  mode 00755
+end

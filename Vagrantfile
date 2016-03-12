@@ -56,10 +56,45 @@ Vagrant.configure(2) do |config|
   config.vm.define "dev" do |dev|
     dev.vm.box = "ubuntu/trusty64"
     dev.vm.provider :virtualbox do |vb|
+      vb.name = "information_palace_dev"
+      vb.gui = false
       vb.memory = "8192"
+      vb.cpus = 2
+      vb.customize ["modifyvm", :id, "--nictype1", "virtio"]
     end
     dev.vm.network "private_network", ip: "192.168.9.24"
   end
+
+  config.vm.define "awsdemo", autostart: false do |demo|
+    demo.vm.box = "dummy"
+    rsync_excludes = ["data/", ".git/", ".gitignore/", "infop-static/", "information_palace/", "output/", "**/.idea/", "**/.sbtserver/", "**/target/", "**/logs/"]
+    rsync_args = ["--verbose", "--archive", "--delete", "-z"]
+    demo.vm.synced_folder ".", "/vagrant", type: "rsync", rsync__exclude: rsync_excludes, rsync__agrs: rsync_args
+
+    demo.vm.provider :aws do |aws, override|
+      aws.access_key_id = ENV['AWS_ACCESS_KEY_ID']
+      aws.secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
+      aws.keypair_name = "all_purpose"
+
+      aws.ami = "ami-fce3c696"
+
+      aws.instance_type = "m4.large"
+      aws.elastic_ip = true
+      aws.region = "us-east-1"
+      aws.security_groups = ["sg-0ca04c74"]
+      aws.subnet_id = "subnet-f1e550a8"
+      aws.tags = {
+        Name: "Vagrant - Information Palace"
+      }
+      aws.terminate_on_shutdown = false
+
+      aws.block_device_mapping = [{"DeviceName" => "/dev/sda1", "Ebs.VolumeSize" => 20}]
+
+      override.ssh.username = "ubuntu"
+      override.ssh.private_key_path = "all_purpose.pem"
+    end
+  end
+
 
   # Define a Vagrant Push strategy for pushing to Atlas. Other push strategies
   # such as FTP and Heroku are also available. See the documentation at

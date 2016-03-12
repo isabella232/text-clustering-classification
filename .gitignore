@@ -16,3 +16,4 @@ project/project/
 /data
 /output
 .vagrant
+*.pem
