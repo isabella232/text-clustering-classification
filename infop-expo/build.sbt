@@ -8,7 +8,7 @@ packageSummary := "Text Analytics Expo Debian Package"
 
 packageDescription := """Packaged text analytics expo with code and data."""
 
-lazy val root = (project in file(".")).enablePlugins(PlayScala, DebianPlugin, JavaServerAppPackaging)
+lazy val root = (project in file(".")).enablePlugins(PlayScala, DebianPlugin, JavaServerAppPackaging, LauncherJarPlugin)
 
 scalaVersion := "2.11.6"
 

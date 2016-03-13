@@ -122,20 +122,4 @@ Vagrant.configure(2) do |config|
     chef.add_role "infop_master"
   end
 
-  config.vm.provision "batch_cluster", :type => "chef_solo", :run => "always" do |chef|
-    chef.node_name = "infop-master"
-    chef.nodes_path = "nodes"
-    chef.roles_path = "roles"
-    chef.cookbooks_path = "cookbooks"
-    chef.add_recipe "batch_cluster"
-  end
-
-  config.vm.provision "expo", :type => "chef_solo", :run => "always" do |chef|
-    chef.node_name = "infop-master"
-    chef.nodes_path = "nodes"
-    chef.roles_path = "roles"
-    chef.cookbooks_path = "cookbooks"
-    chef.add_recipe "expo"
-  end
-
 end

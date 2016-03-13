@@ -1,12 +1,12 @@
 #
-# Cookbook Name:: etc-environment
+# Cookbook Name:: vagrant_compat
 # Spec:: default
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
 require 'spec_helper'
 
-describe 'etc-environment::default' do
+describe 'vagrant_compat::default' do
   context 'When all attributes are default, on an unspecified platform' do
     let(:chef_run) do
       runner = ChefSpec::ServerRunner.new

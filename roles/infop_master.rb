@@ -2,12 +2,14 @@ name "infop_master"
 description "Role for master node of an information palace (cluster)"
 
 run_list(
-  "recipe[etc-environment]",
-  "recipe[java]",
+  "recipe[vagrant_compat]",
+  "recipe[oracle_java_8]",
   "recipe[scala]",
   "recipe[simple-scala-sbt]",
   "recipe[apache_spark::spark-standalone-master]",
-  "recipe[apache_spark::spark-standalone-worker]"
+  "recipe[apache_spark::spark-standalone-worker]",
+  "recipe[batch_cluster]",
+  "recipe[expo]"
 )
 
 default_attributes(
@@ -16,7 +18,15 @@ default_attributes(
       :accept_oracle_download_terms => true
     },
     :jdk_version => 8,
-    :install_flavor => 'oracle'
+    :install_flavor => 'oracle',
+    :jdk => {
+      '8' => {
+        'x86_64' => {
+          :url => 'https://s3.amazonaws.com/3pillar-atg-backup/jdk-8u65-linux-x64.tar.gz',
+          :checksum => '88db2aacdc222c2add4d92822f528b7a2101552272db4487f33b38b0b47826e7'
+        }
+      }
+    }
   },
 
   :scala => {

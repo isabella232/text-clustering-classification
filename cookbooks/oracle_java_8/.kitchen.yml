@@ -17,5 +17,5 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[etc-environment::default]
+      - recipe[oracle_java_8::default]
     attributes:

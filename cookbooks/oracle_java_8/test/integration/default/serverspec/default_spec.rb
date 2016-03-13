@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'etc-environment::default' do
+describe 'oracle_java_8::default' do
   # Serverspec examples can be found at
   # http://serverspec.org/resource_types.html
   it 'does something' do
