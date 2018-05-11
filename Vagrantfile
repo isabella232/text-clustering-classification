@@ -74,7 +74,7 @@ Vagrant.configure(2) do |config|
     demo.vm.provider :aws do |aws, override|
       aws.access_key_id = ENV['AWS_ACCESS_KEY_ID']
       aws.secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
-      aws.keypair_name = "all_purpose"
+      aws.keypair_name = "infop"
 
       aws.ami = "ami-fce3c696"
 
@@ -91,7 +91,7 @@ Vagrant.configure(2) do |config|
       aws.block_device_mapping = [{"DeviceName" => "/dev/sda1", "Ebs.VolumeSize" => 20}]
 
       override.ssh.username = "ubuntu"
-      override.ssh.private_key_path = "all_purpose.pem"
+      override.ssh.private_key_path = "infop.pem"
     end
   end
 

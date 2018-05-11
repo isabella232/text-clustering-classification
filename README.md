@@ -35,7 +35,8 @@ vagrant reload dev
 
 ### AWS
 
-You will need the *all_purpose* private key for this. Or, you can use your own key and replace these lines in *Vagrantfile*:
+You will need a private key for this. Place your key in the project root and rename the key file to ``infop.pem``
+or replace these lines in *Vagrantfile*:
 
 ```
 aws.keypair_name = "your_key_name"
